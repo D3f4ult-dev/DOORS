@@ -14,7 +14,8 @@
             text-align: center;
             padding: 20px;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            background-color: #000;
         }
         #video-background {
             position: fixed;
@@ -25,8 +26,22 @@
             object-fit: cover;
             z-index: -1;
         }
+        h1, .subtitle, .game-image, .gallery, .play-button, .requirements {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
         h1 {
             margin-bottom: 10px;
+            font-size: 2.5em;
+            transition: transform 0.3s;
+        }
+        h1:hover {
+            transform: scale(1.1);
         }
         .subtitle {
             font-size: 1.2em;
@@ -37,6 +52,10 @@
             max-width: 600px;
             border-radius: 10px;
             margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .game-image:hover {
+            transform: scale(1.05);
         }
         .gallery {
             display: flex;
@@ -48,6 +67,11 @@
             width: 150px;
             height: auto;
             border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
         }
         .play-button {
             background-color: #6200ea;
@@ -58,10 +82,11 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .play-button:hover {
             background-color: #3700b3;
+            transform: scale(1.1);
         }
         .requirements {
             margin-top: 20px;
@@ -71,6 +96,10 @@
             background-color: rgba(30, 30, 30, 0.8);
             padding: 15px;
             border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .requirements:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -79,16 +108,15 @@
         <source src="back.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <h1>LSPLASH Presents</h1>
-    <p class="subtitle">DOORS - A thrilling horror experience on Roblox</p>
-    <img class="game-image" src="https://tr.rbxcdn.com/180DAY-87a63dd16a748302b42f950b9a232d7d/768/432/Image/Webp/noFilter" alt="DOORS Game Cover">
-    <div class="gallery">
-        <img src="" alt="Screenshot 1">
+    <h1 class="scroll-effect">LSPLASH Presents</h1>
+    <p class="subtitle scroll-effect">DOORS - A thrilling horror experience on Roblox</p>
+    <img class="game-image scroll-effect" src="https://tr.rbxcdn.com/180DAY-87a63dd16a748302b42f950b9a232d7d/768/432/Image/Webp/noFilter" alt="DOORS Game Cover">
+    <div class="gallery scroll-effect">
         <img src="https://tr.rbxcdn.com/180DAY-5e188aea3dcc3d95e140491717b70e16/768/432/Image/Webp/noFilter" alt="Screenshot 2">
         <img src="https://tr.rbxcdn.com/180DAY-f9611f8b5bf20e4ce197d620b9d0aa1a/768/432/Image/Webp/noFilter" alt="Screenshot 3">
     </div>
-    <a class="play-button" href="https://www.roblox.com/games/6516141723/DOORS" target="_blank">Play Now</a>
-    <div class="requirements">
+    <a class="play-button scroll-effect" href="https://www.roblox.com/games/6516141723/DOORS" target="_blank">Play Now</a>
+    <div class="requirements scroll-effect">
         <h2>System Requirements</h2>
         <h3>Minimum:</h3>
         <ul>
@@ -107,6 +135,17 @@
             <li>Storage: 2 GB available space</li>
         </ul>
     </div>
+    <script>
+        document.addEventListener("scroll", function() {
+            let elements = document.querySelectorAll(".scroll-effect");
+            let windowHeight = window.innerHeight;
+            elements.forEach(el => {
+                let position = el.getBoundingClientRect().top;
+                if (position < windowHeight - 100) {
+                    el.classList.add("fade-in");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
